@@ -1,0 +1,51 @@
+{
+    "name": "meteor-desktop-splash-screen",
+    "version": "0.0.27",
+    "engines": {
+        "node": ">=6.0.0"
+    },
+    "description": "Meteor Desktop splash screen plugin.",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "ava tests/functional/**/*.js --source dist/**/* -s",
+        "test-watch": "ava tests/functional/**/*.js --source src --watch --verbose -s",
+        "prepublish": "npm run build",
+        "lint": "eslint src tests",
+        "build": "babel src --out-dir dist --source-maps inline --copy-files",
+        "build-watch": "babel src --watch --out-dir dist --source-maps inline --copy-files",
+        "version": "node dist/scripts/propagateVersion.js && git add README.md"
+    },
+    "author": "Bartosz Wojtkowiak <bartosz@wojtkowiak.it>",
+    "license": "MIT",
+    "devDependencies": {
+        "ava": "^0.16.0",
+        "babel-cli": "^6.16.0",
+        "babel-preset-node6": "^11.0.0",
+        "eslint": "^3.8.1",
+        "eslint-config-airbnb-base": "^9.0.0",
+        "eslint-plugin-import": "^2.0.1",
+        "spectron": "^3.4.0",
+        "shelljs": "^0.7.5",
+        "electron": "^1.4.4",
+        "node-resemble-js": "^0.1.1",
+        "meteor-desktop-plugin-test-suite": "0.0.15"
+    },
+    "dependencies": {
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wojtkowiak/meteor-desktop-splash-screen"
+    },
+    "keywords": [
+        "electron",
+        "meteor",
+        "packager",
+        "desktop",
+        "splash",
+        "splashscreen"
+    ],
+    "bugs": {
+        "url": "https://github.com/wojtkowiak/meteor-desktop-splash-screen/issues"
+    },
+    "homepage": "https://github.com/wojtkowiak/meteor-desktop-splash-screen"
+}

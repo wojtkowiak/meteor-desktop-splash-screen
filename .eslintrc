@@ -1,0 +1,36 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "plugins": [
+        "import"
+    ],
+    "settings": {
+        "import/core-modules": [
+            "electron"
+        ]
+    },
+    "rules": {
+        "indent": [
+            2,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "comma-dangle": [
+            0
+        ],
+        "no-bitwise": [
+            0
+        ],
+        "import/no-extraneous-dependencies": ["error",
+            {
+                "devDependencies": ["**/*.js"]
+            }
+        ]
+    }
+}
