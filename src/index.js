@@ -10,6 +10,7 @@ import SplashWindow from './splashWindow';
  * @property {string}  imagePath      - Path to the image relative to the .desktop dir.
  * @property {Object}  style          - Style of the html body that displays the image.
  * @property {Object}  windowSettings - Settings passed to BrowserWindow.
+ * @property {Object}  module         - The Module class from Meteor Desktop.
  */
 
 /**
@@ -26,7 +27,7 @@ import SplashWindow from './splashWindow';
  */
 class SplashScreen {
 
-    constructor(log, app, appSettings, systemEvents, modules, settings) {
+    constructor(log, app, appSettings, systemEvents, modules, settings, module) {
         if ('enabled' in settings && !settings.enabled) return;
 
         this.log = log;

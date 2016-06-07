@@ -1,6 +1,6 @@
 {
     "name": "meteor-desktop-splash-screen",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "node": ">=6.0.0"
     },
@@ -41,7 +41,9 @@
         "electron",
         "meteor",
         "packager",
-        "desktop"
+        "desktop",
+        "splash",
+        "splashscreen"
     ],
     "bugs": {
         "url": "https://github.com/wojtkowiak/meteor-electron-desktop-client/issues"
