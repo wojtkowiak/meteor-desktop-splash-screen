@@ -43,7 +43,7 @@ Here is a definition of what can be set:
  * Settings object.
  * @typedef {Object} PluginSettings
  * @property {boolean} enabled       - Is splash screen enabled.
- * @property {string} windowTitle    - title of the window that shows splash screen.
+ * @property {string} windowTitle    - Title of the window that shows splash screen. It defaults to the `name` from settings.json.
  * @property {string} imagePath      - Path to the image relative to the .desktop dir.
  * @property {Object} style          - Style of the html body that displays the image.
  * @property {Object} windowSettings - Settings passed to BrowserWindow.

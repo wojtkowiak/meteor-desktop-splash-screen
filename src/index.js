@@ -6,7 +6,8 @@ import SplashWindow from './splashWindow';
  * Settings object.
  * @typedef {Object} PluginSettings
  * @property {boolean} enabled        - Is splash screen enabled.
- * @property {string}  windowTitle    - title of the window that shows splash screen.
+ * @property {string}  windowTitle    - Title of the window that shows splash screen. It defaults
+ *                                      to the `name` from settings.json.
  * @property {string}  imagePath      - Path to the image relative to the .desktop dir.
  * @property {Object}  style          - Style of the html body that displays the image.
  * @property {Object}  windowSettings - Settings passed to BrowserWindow.
@@ -31,14 +32,11 @@ class SplashScreen {
         if ('enabled' in settings && !settings.enabled) return;
 
         this.log = log;
-        this.settings = settings;
-        this.systemEvents = systemEvents;
-
         this.htmlBody = new HtmlBody(
             log,
             path.join(__dirname, 'splash.html'),
             path.resolve(path.join(__dirname, '..', '..', '..', 'splash.html')),
-            ('windowTitle' in settings) ? settings.windowTitle : undefined,
+            ('windowTitle' in settings) ? settings.windowTitle : appSettings.name,
             ('imagePath' in settings) ? settings.imagePath : undefined,
             ('style' in settings) ? settings.style : {}
         );
