@@ -172,7 +172,7 @@ test('if window settings can be injected', async t => {
 });
 
 // TODO: implement unit test instead of this incomplete functional one.
-test('if splash screen is displayed with proper window icon', async t => {
+test('if splash screen is displayed with proper window icon [incomplete test]', async t => {
     const app = await getApp(t);
     await sendIpc(
         app,
