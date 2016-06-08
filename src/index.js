@@ -43,10 +43,16 @@ class SplashScreen {
             ('style' in settings) ? settings.style : {}
         );
 
+        const windowSettings = ('windowSettings' in settings) ? settings.windowSettings : {};
+
+        if ('window' in appSettings && 'icon' in appSettings.window) {
+            windowSettings.icon = appSettings.window.icon;
+        }
+
         this.splashWindow = new SplashWindow(
             log,
             this.htmlBody.getInstallPath(),
-            ('windowSettings' in settings) ? settings.windowSettings : {}
+            windowSettings
         );
 
         this.registerToEvents();

@@ -46,7 +46,6 @@ async function isImageSimilar(source, reference, tolerance = 5) {
     });
 }
 
-
 const appDir = path.join(__dirname, '..', 'testApp');
 
 test.before(
@@ -54,13 +53,13 @@ test.before(
         await createTestApp(appDir, 'meteor-desktop-splash-screen');
         shell.mkdir(path.join(appDir, 'assets'));
         shell.cp('splashScreen.png', path.join(appDir, 'assets'));
+        shell.cp('meteor.png', path.join(appDir, 'assets'));
     }
 );
 
 test.after(
     () => shell.rm('-rf', appDir)
 );
-
 
 test.beforeEach(async t => {
     t.context.app = new Application({
@@ -118,7 +117,7 @@ test('if splash screen can be disabled', async t => {
         enabled: false
     });
     await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
-    await wait(1000);
+    await wait(200);
     t.true(await app.client.getWindowCount() === 1);
 });
 
@@ -148,7 +147,7 @@ test('if styles can be injected', async t => {
     await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
     await waitForSplashWindow(t, app);
 
-    await wait(2000);
+    await wait(200);
     const imageBuffer = await app.browserWindow.capturePage();
     fs.writeFile('page_2.png', imageBuffer);
 
@@ -170,4 +169,32 @@ test('if window settings can be injected', async t => {
     await waitForSplashWindow(t, app);
 
     t.deepEqual(await app.browserWindow.getSize(), [200, 200]);
+});
+
+// TODO: implement unit test instead of this incomplete functional one.
+test('if splash screen is displayed with proper window icon', async t => {
+    const app = await getApp(t);
+    await sendIpc(
+        app,
+        'constructPlugin',
+        undefined,
+        undefined,
+        {
+            window: {
+                icon: path.join(appDir, 'assets', 'meteor.png')
+            }
+        },
+        undefined,
+        undefined, {
+            windowSettings: { webPreferences: { nodeIntegration: true } }
+        });
+    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await waitForSplashWindow(t, app);
+
+    // TODO: how to check if windows is displayed with proper icon? is this possible in spectron?
+
+    // For now you can test it manually here, uncomment line below and you will have 20 secs to
+    // verify it :)
+
+    // await wait(20000);
 });
