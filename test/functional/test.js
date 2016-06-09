@@ -82,7 +82,7 @@ test('if splash screen is displayed', async t => {
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await waitForSplashWindow(t, app);
     t.true(await app.client.getWindowCount() === 2);
 });
@@ -92,7 +92,7 @@ test('if splash screen is closed', async t => {
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined,
         undefined, { windowSettings: { webPreferences: { nodeIntegration: true } } }
     );
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await waitForSplashWindow(t, app);
     t.is(await app.client.getWindowCount(), 2);
     await sendIpc(app, 'fireSystemEvent', 'beforeLoadingFinished');
@@ -105,7 +105,7 @@ test('if window title is set properly', async t => {
         windowTitle: 'SplashTest',
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await waitForSplashWindow(t, app);
 
     t.is(await app.client.getTitle(), 'SplashTest');
@@ -116,7 +116,7 @@ test('if splash screen can be disabled', async t => {
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         enabled: false
     });
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await wait(200);
     t.true(await app.client.getWindowCount() === 1);
 });
@@ -126,7 +126,7 @@ test('if image is displayed', async t => {
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await waitForSplashWindow(t, app);
 
     await wait(200);
@@ -144,7 +144,7 @@ test('if styles can be injected', async t => {
         style: { 'background-color': 'red' },
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await waitForSplashWindow(t, app);
 
     await wait(200);
@@ -165,7 +165,7 @@ test('if window settings can be injected', async t => {
             webPreferences: { nodeIntegration: true }
         }
     });
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await waitForSplashWindow(t, app);
 
     t.deepEqual(await app.browserWindow.getSize(), [200, 200]);
@@ -188,7 +188,7 @@ test('if splash screen is displayed with proper window icon [incomplete test]', 
         undefined, {
             windowSettings: { webPreferences: { nodeIntegration: true } }
         });
-    await sendIpc(app, 'fireSystemEvent', 'beforeInitialization');
+    await sendIpc(app, 'fireSystemEvent', 'beforeModulesLoad');
     await waitForSplashWindow(t, app);
 
     // TODO: how to check if windows is displayed with proper icon? is this possible in spectron?

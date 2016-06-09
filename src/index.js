@@ -31,6 +31,8 @@ class SplashScreen {
     constructor(log, app, appSettings, systemEvents, modules, settings, module) {
         if ('enabled' in settings && !settings.enabled) return;
 
+        this.systemEvents = systemEvents;
+        
         this.log = log;
         this.htmlBody = new HtmlBody(
             log,
@@ -57,7 +59,7 @@ class SplashScreen {
     }
 
     registerToEvents() {
-        this.systemEvents.on('beforeInitialization', () => {
+        this.systemEvents.on('beforeModulesLoad', () => {
             this.htmlBody.prepare();
             this.splashWindow.show();
         });
