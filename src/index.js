@@ -35,7 +35,7 @@ class SplashScreen {
 
         this.log = log.loggers.get('meteor-desktop-splash-screen');
         this.htmlBody = new HtmlBody(
-            log,
+            this.log.getLoggerFor('html'),
             path.join(__dirname, 'splash.html'),
             path.resolve(path.join(__dirname, '..', '..', '..', 'splash.html')),
             ('windowTitle' in settings) ? settings.windowTitle : appSettings.name,
@@ -50,7 +50,7 @@ class SplashScreen {
         }
 
         this.splashWindow = new SplashWindow(
-            log,
+            this.log.getLoggerFor('splashWindow'),
             this.htmlBody.getInstallPath(),
             windowSettings
         );
