@@ -9,7 +9,7 @@ In your `.desktop/settings.json` add this package to your plugins list:
 {
     "plugins": {
        "meteor-desktop-splash-screen": {
-            "version": "0.0.3"
+            "version": "0.0.12"
         }
     }
 }
@@ -19,23 +19,24 @@ __On Linux this does not look so nice because transparency is not supported in E
  
 ### Settings
 
-You can pass custom settings to the plugin for example:
+You can pass custom settings to the plugin, for example:
 ```json
 {
     "plugins": {
        "meteor-desktop-splash-screen": {
-            "version": "0.0.3",
+            "version": "0.0.12",
             "style": { 
                 "box-sizing": "border-box",
                 "border": "5px solid black",
                 "border-radius": "5px"
             },
-            "imagePath": "assets/mySplashLogo.png",
+            "imagePath": "mySplashLogo.png",
             "windowSettings": { "width": 640, "height": 480 }
         }
     }
 }
 ```
+Note that `imagePath` should be relative to `assets` directory in your `.desktop`.
 
 Here is a definition of what can be set:
 ```javascript
@@ -44,7 +45,7 @@ Here is a definition of what can be set:
  * @typedef {Object} PluginSettings
  * @property {boolean} enabled       - Is splash screen enabled.
  * @property {string} windowTitle    - Title of the window that shows splash screen. It defaults to the `name` from settings.json.
- * @property {string} imagePath      - Path to the image relative to the .desktop dir.
+ * @property {string} imagePath      - Path to the image relative to the .desktop/assets dir.
  * @property {Object} style          - Style of the html body that displays the image.
  * @property {Object} windowSettings - Settings passed to BrowserWindow.
  */

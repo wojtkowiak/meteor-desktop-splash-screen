@@ -1,6 +1,6 @@
 {
     "name": "meteor-desktop-splash-screen",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "engines": {
         "node": ">=6.0.0"
     },
@@ -29,7 +29,7 @@
         "electron-packager": "^7.0.2",
         "electron-prebuilt": "^1.1.2",
         "node-resemble-js": "^0.0.5",
-        "meteor-desktop-plugin-test-suite": "0.0.3"
+        "meteor-desktop-plugin-test-suite": "0.0.5"
     },
     "dependencies": {
     },

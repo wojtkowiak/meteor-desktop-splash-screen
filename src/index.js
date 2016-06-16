@@ -32,8 +32,8 @@ class SplashScreen {
         if ('enabled' in settings && !settings.enabled) return;
 
         this.systemEvents = systemEvents;
-        
-        this.log = log;
+
+        this.log = log.loggers.get('meteor-desktop-splash-screen');
         this.htmlBody = new HtmlBody(
             log,
             path.join(__dirname, 'splash.html'),

@@ -12,7 +12,7 @@ export default class HtmlBody {
      * @param {string} imagePath    - Path to the image.
      * @param {Object} style        - Styles to use instead of the defaults.
      */
-    constructor(log, templatePath, installPath, title = '', imagePath = 'assets/splashScreen.png',
+    constructor(log, templatePath, installPath, title = '', imagePath = 'splashScreen.png',
                 style = {}) {
         this.log = log;
         this.templatePath = templatePath;
@@ -21,7 +21,7 @@ export default class HtmlBody {
         this.imagePath = imagePath;
         this.style = style;
         this.defaultStyle = {
-            'background-image': `url(${this.imagePath})`,
+            'background-image': `url(assets/${this.imagePath})`,
             'background-size': 'contain',
             'background-repeat': 'no-repeat',
             'background-attachment': 'fixed',
