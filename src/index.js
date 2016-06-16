@@ -17,7 +17,7 @@ import SplashWindow from './splashWindow';
 /**
  * Implements a simple splash screen for Meteor Desktop.
  *
- * @param {Object} log              - Winston logger instance.
+ * @param {Object} log              - Winston logger.
  * @param {Object} app              - Reference to the Electron app.
  * @param {Object} appSettings      - settings.json object.
  * @param {Object} systemEvents     - Event emitter for listening or emitting events on the desktop
