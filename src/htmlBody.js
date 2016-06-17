@@ -26,7 +26,7 @@ export default class HtmlBody {
             'background-repeat': 'no-repeat',
             'background-attachment': 'fixed',
             'background-position': 'center center',
-            'background-color': 'transparent'
+            'background-color': 'rgba(0, 0, 0, 0)'
         };
 
         Object.keys(this.style).forEach((rule) => {
