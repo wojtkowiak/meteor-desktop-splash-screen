@@ -21,7 +21,7 @@ export default class HtmlBody {
         this.imagePath = imagePath;
         this.style = style;
         this.defaultStyle = {
-            'background-image': `url(assets/${this.imagePath})`,
+            'background-image': `url(file:///desktop.asar/assets/${this.imagePath})`,
             'background-size': 'contain',
             'background-repeat': 'no-repeat',
             'background-attachment': 'fixed',

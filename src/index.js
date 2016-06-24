@@ -37,7 +37,8 @@ class SplashScreen {
         this.htmlBody = new HtmlBody(
             this.log.getLoggerFor('html'),
             path.join(__dirname, 'splash.html'),
-            path.resolve(path.join(__dirname, '..', '..', '..', 'splash.html')),
+            // TODO: make this path configurable and absolute
+            path.resolve(path.join(__dirname, '..', '..', '..', '..', 'splash.html')),
             ('windowTitle' in settings) ? settings.windowTitle : appSettings.name,
             ('imagePath' in settings) ? settings.imagePath : undefined,
             ('style' in settings) ? settings.style : {}
