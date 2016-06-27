@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 /**
  * Represents the HTML body of the window that should display the splash screen.
@@ -16,12 +17,21 @@ export default class HtmlBody {
                 style = {}) {
         this.log = log;
         this.templatePath = templatePath;
-        this.installPath = installPath;
+        this.installPath = path.join(installPath, 'splash.html');
         this.title = title;
         this.imagePath = imagePath;
         this.style = style;
+
+        let backgroundImageUrl = encodeURI(
+            path.join(installPath, 'desktop.asar', 'assets', this.imagePath).replace(/\\/gm, '/'));
+
+        if (process.env.ELECTRON_ENV === 'test') {
+            backgroundImageUrl = encodeURI(
+                path.join(installPath, 'assets', this.imagePath).replace(/\\/gm, '/'));
+        }
+
         this.defaultStyle = {
-            'background-image': `url(file:///desktop.asar/assets/${this.imagePath})`,
+            'background-image': `url(file:///${backgroundImageUrl})`,
             'background-size': 'contain',
             'background-repeat': 'no-repeat',
             'background-attachment': 'fixed',

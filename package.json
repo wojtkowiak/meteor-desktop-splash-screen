@@ -1,6 +1,6 @@
 {
     "name": "meteor-desktop-splash-screen",
-    "version": "0.0.16",
+    "version": "0.0.20",
     "engines": {
         "node": ">=6.0.0"
     },
@@ -16,20 +16,20 @@
     "author": "Bartosz Wojtkowiak <bartosz@wojtkowiak.it>",
     "license": "MIT",
     "devDependencies": {
-        "ava": "^0.15.1",
-        "babel-cli": "^6.9.0",
-        "babel-core": "^6.9.0",
-        "babel-eslint": "^6.0.4",
+        "ava": "^0.15.2",
+        "babel-cli": "^6.10.1",
+        "babel-core": "^6.10.4",
+        "babel-eslint": "^6.1.0",
         "babel-preset-node6": "^11.0.0",
-        "eslint": "^2.10.2",
+        "eslint": "^2.13.1",
         "eslint-config-airbnb-base": "^3.0.1",
-        "eslint-plugin-import": "^1.8.0",
-        "spectron": "^3.1.0",
+        "eslint-plugin-import": "^1.9.2",
+        "spectron": "^3.2.3",
         "shelljs": "^0.7.0",
-        "electron-packager": "^7.0.2",
-        "electron-prebuilt": "^1.1.2",
+        "electron-packager": "^7.1.0",
+        "electron-prebuilt": "^1.2.5",
         "node-resemble-js": "^0.0.5",
-        "meteor-desktop-plugin-test-suite": "0.0.5"
+        "meteor-desktop-plugin-test-suite": "0.0.7"
     },
     "dependencies": {
     },

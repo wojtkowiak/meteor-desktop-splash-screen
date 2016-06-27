@@ -64,7 +64,8 @@ test.after(
 test.beforeEach(async t => {
     t.context.app = new Application({
         path: getElectronPath(),
-        args: [path.join(__dirname, '..', 'testApp')]
+        args: [path.join(__dirname, '..', 'testApp')],
+        env: { ELECTRON_ENV: 'test' }
     });
     await t.context.app.start();
 });

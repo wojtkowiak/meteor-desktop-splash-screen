@@ -31,6 +31,11 @@ class SplashScreen {
     constructor(log, app, appSettings, systemEvents, modules, settings, module) {
         if ('enabled' in settings && !settings.enabled) return;
 
+        const appPath = app.getAppPath();
+
+        const installPath = ~appPath.indexOf('asar') ?
+            path.resolve(path.join(appPath, '..')) : appPath;
+
         this.systemEvents = systemEvents;
 
         this.log = log.loggers.get('meteor-desktop-splash-screen');
@@ -38,7 +43,7 @@ class SplashScreen {
             this.log.getLoggerFor('html'),
             path.join(__dirname, 'splash.html'),
             // TODO: make this path configurable and absolute
-            path.resolve(path.join(__dirname, '..', '..', '..', '..', 'splash.html')),
+            installPath,
             ('windowTitle' in settings) ? settings.windowTitle : appSettings.name,
             ('imagePath' in settings) ? settings.imagePath : undefined,
             ('style' in settings) ? settings.style : {}
