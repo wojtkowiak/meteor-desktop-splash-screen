@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import path from 'path';
 import HtmlBody from './htmlBody';
 import SplashWindow from './splashWindow';

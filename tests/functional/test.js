@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign, no-console */
 import test from 'ava';
 import { Application } from 'spectron';
 import path from 'path';
@@ -14,7 +15,7 @@ async function getApp(t) {
 }
 
 async function waitForSplashWindow(t, app) {
-    await app.client.waitUntil((await app.client.getWindowCount()) == 2);
+    await app.client.waitUntil((await app.client.getWindowCount()) === 2);
     await app.client.windowByIndex(1);
     await app.client.waitUntilWindowLoaded();
     await app.client.waitUntil(
@@ -52,8 +53,8 @@ test.before(
     async () => {
         await createTestApp(appDir, 'meteor-desktop-splash-screen');
         shell.mkdir(path.join(appDir, 'assets'));
-        shell.cp('splashScreen.png', path.join(appDir, 'assets'));
-        shell.cp('meteor.png', path.join(appDir, 'assets'));
+        shell.cp('assets/splashScreen.png', path.join(appDir, 'assets'));
+        shell.cp('assets/meteor.png', path.join(appDir, 'assets'));
     }
 );
 
@@ -61,7 +62,7 @@ test.after(
     () => shell.rm('-rf', appDir)
 );
 
-test.beforeEach(async t => {
+test.beforeEach(async (t) => {
     t.context.app = new Application({
         path: getElectronPath(),
         args: [path.join(__dirname, '..', 'testApp')],
@@ -70,7 +71,7 @@ test.beforeEach(async t => {
     await t.context.app.start();
 });
 
-test.afterEach.always(async t => {
+test.afterEach.always(async (t) => {
     if (t.context.app && t.context.app.isRunning()) {
         await t.context.app.stop();
     }
@@ -78,7 +79,7 @@ test.afterEach.always(async t => {
 
 test('the test app', async t => await getApp(t));
 
-test('if splash screen is displayed', async t => {
+test('if splash screen is displayed', async (t) => {
     const app = await getApp(t);
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         windowSettings: { webPreferences: { nodeIntegration: true } }
@@ -88,7 +89,7 @@ test('if splash screen is displayed', async t => {
     t.true(await app.client.getWindowCount() === 2);
 });
 
-test('if splash screen is closed', async t => {
+test('if splash screen is closed', async (t) => {
     const app = await getApp(t);
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined,
         undefined, { windowSettings: { webPreferences: { nodeIntegration: true } } }
@@ -100,7 +101,7 @@ test('if splash screen is closed', async t => {
     t.is(await app.client.getWindowCount(), 1);
 });
 
-test('if window title is set properly', async t => {
+test('if window title is set properly', async (t) => {
     const app = await getApp(t);
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         windowTitle: 'SplashTest',
@@ -112,7 +113,7 @@ test('if window title is set properly', async t => {
     t.is(await app.client.getTitle(), 'SplashTest');
 });
 
-test('if splash screen can be disabled', async t => {
+test('if splash screen can be disabled', async (t) => {
     const app = await getApp(t);
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         enabled: false
@@ -122,7 +123,7 @@ test('if splash screen can be disabled', async t => {
     t.true(await app.client.getWindowCount() === 1);
 });
 
-test('if image is displayed', async t => {
+test('if image is displayed', async (t) => {
     const app = await getApp(t);
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         windowSettings: { webPreferences: { nodeIntegration: true } }
@@ -139,7 +140,7 @@ test('if image is displayed', async t => {
     fs.unlinkSync('page.png');
 });
 
-test('if styles can be injected', async t => {
+test('if styles can be injected', async (t) => {
     const app = await getApp(t);
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         style: { 'background-color': 'red' },
@@ -157,7 +158,7 @@ test('if styles can be injected', async t => {
     fs.unlinkSync('page_2.png');
 });
 
-test('if window settings can be injected', async t => {
+test('if window settings can be injected', async (t) => {
     const app = await getApp(t);
     await sendIpc(app, 'constructPlugin', undefined, undefined, undefined, undefined, undefined, {
         windowSettings: {
@@ -173,7 +174,7 @@ test('if window settings can be injected', async t => {
 });
 
 // TODO: implement unit test instead of this incomplete functional one.
-test('if splash screen is displayed with proper window icon [incomplete test]', async t => {
+test('if splash screen is displayed with proper window icon [incomplete test]', async (t) => {
     const app = await getApp(t);
     await sendIpc(
         app,

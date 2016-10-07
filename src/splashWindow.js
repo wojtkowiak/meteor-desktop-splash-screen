@@ -7,7 +7,8 @@ export default class SplashWindow {
         this.opened = false;
         this.bodyPath = bodyPath;
         this.windowSettings = {
-            width: 1024, height: 768,
+            width: 1024,
+            height: 768,
             alwaysOnTop: true,
             frame: false,
             transparent: true,

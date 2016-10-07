@@ -57,8 +57,7 @@ If you have an icon set for the window in your settings.json it will be automati
 
 PRs are always welcome. Be sure to update the tests.
 
-To run the tests you need to open two terminals.
-In the first one type `npm run build-watch` and in the second `npm run test-watch`. 
+For smooth developing process you need to open two terminals. In the first one type `npm run build-watch` and in the second `npm run test-watch`. 
 
 Tests are run by [AVA](https://github.com/avajs).
 
