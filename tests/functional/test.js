@@ -31,7 +31,11 @@ function wait(ms) {
     });
 }
 
-async function isImageSimilar(source, reference, tolerance = 5) {
+async function isImageSimilar(
+    source,
+    reference,
+    tolerance = (process.env.TRAVIS || process.env.APPVEYOR ? 15 : 5)
+) {
     return new Promise((resolve) => {
         resemble(source)
             .compareTo(reference)
@@ -133,9 +137,11 @@ test('if image is displayed', async (t) => {
 
     await wait(200);
     const imageBuffer = await app.browserWindow.capturePage();
-    fs.writeFile('page.png', imageBuffer);
+    fs.writeFileSync(path.join(__dirname, 'page.png'), imageBuffer);
 
-    t.true(await isImageSimilar('page.png', path.join('refs', 'page.png')));
+    t.true(await isImageSimilar(
+        path.join(__dirname, 'page.png'),
+        path.join(__dirname, 'refs', 'page.png')));
 
     fs.unlinkSync('page.png');
 });
@@ -151,9 +157,11 @@ test('if styles can be injected', async (t) => {
 
     await wait(200);
     const imageBuffer = await app.browserWindow.capturePage();
-    fs.writeFile('page_2.png', imageBuffer);
+    fs.writeFileSync(path.join(__dirname, 'page_2.png'), imageBuffer);
 
-    t.true(await isImageSimilar('page_2.png', path.join('refs', 'page_modified_style.png')));
+    t.true(await isImageSimilar(
+        path.join(__dirname, 'page_2.png'),
+        path.join(__dirname, 'refs', 'page_modified_style.png')));
 
     fs.unlinkSync('page_2.png');
 });

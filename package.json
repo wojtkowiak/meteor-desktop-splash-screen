@@ -7,8 +7,8 @@
     "description": "Meteor Desktop splash screen plugin.",
     "main": "dist/index.js",
     "scripts": {
-        "test": "npm run build && ava tests/functional/**/*.js --source dist/**/* --verbose -s",
-        "test-watch": "npm run build && ava tests/functional/**/*.js --source dist/**/* --watch --verbose -s",
+        "test": "ava tests/functional/**/*.js --source dist/**/* --verbose -s",
+        "test-watch": "ava tests/functional/**/*.js --source dist/**/* --watch --verbose -s",
         "prepublish": "npm run build",
         "lint": "eslint src tests",
         "build": "babel src --out-dir dist --source-maps inline --copy-files",

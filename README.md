@@ -1,5 +1,8 @@
-## Meteor Desktop Splash Screen
+# Meteor Desktop Splash Screen [![npm version](https://img.shields.io/npm/v/meteor-desktop-splash-screen.svg)](https://npmjs.org/package/meteor-desktop-splash-screen) [![devDependency Status](https://david-dm.org/wojtkowiak/meteor-desktop-splash-screen/dev-status.svg)](https://david-dm.org/wojtkowiak/meteor-desktop-splash-screen#info=devDependencies)
 
+<sup>Travis</sup> [![Travis Build Status](https://travis-ci.org/wojtkowiak/meteor-desktop-splash-screen.svg?branch=master)](https://travis-ci.org/wojtkowiak/meteor-desktop-splash-screen) <sup>AppVeyor</sup> [![Build status](https://ci.appveyor.com/api/projects/status/f52xvrra1gouyg1t?svg=true)](https://ci.appveyor.com/project/wojtkowiak/meteor-desktop-splash-screen) <sup>CircleCI</sup> [![CircleCI](https://circleci.com/gh/wojtkowiak/meteor-desktop-splash-screen.svg?style=svg)](https://circleci.com/gh/wojtkowiak/meteor-desktop-splash-screen)
+
+---
 A nice splash screen for you Meteor app on desktop!
 
 ### Usage
