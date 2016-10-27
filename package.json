@@ -13,6 +13,7 @@
         "lint": "eslint src tests",
         "build": "babel src --out-dir dist --source-maps inline --copy-files",
         "build-watch": "babel src --watch --out-dir dist --source-maps inline --copy-files",
+        "postversion": "npm publish",
         "version": "node dist/scripts/propagateVersion.js && git add README.md"
     },
     "author": "Bartosz Wojtkowiak <bartosz@wojtkowiak.it>",
