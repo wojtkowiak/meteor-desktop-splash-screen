@@ -41,7 +41,8 @@ export default class SplashScreen {
 
         this.eventsBus = eventsBus;
 
-        this.log = log.loggers.get('meteor-desktop-splash-screen');
+        this.log = log;
+
         this.htmlBody = new HtmlBody(
             this.log.getLoggerFor('html'),
             path.join(__dirname, 'splash.html'),
