@@ -5,7 +5,8 @@ import path from 'path';
 import fs from 'fs';
 import shell from 'shelljs';
 import resemble from 'node-resemble-js';
-import { getElectronPath, createTestApp, constructPlugin, fireEventsBusEvent } from 'meteor-desktop-plugin-test-suite';
+import electron from 'electron';
+import { createTestApp, constructPlugin, fireEventsBusEvent } from 'meteor-desktop-test-suite';
 
 async function getApp(t) {
     const app = t.context.app;
@@ -68,7 +69,7 @@ test.after(
 
 test.beforeEach(async (t) => {
     t.context.app = new Application({
-        path: getElectronPath(),
+        path: electron,
         args: [appDir],
         env: { ELECTRON_ENV: 'test', SPLASH_SCREEN_TEST: 1 }
     });
@@ -76,6 +77,18 @@ test.beforeEach(async (t) => {
 });
 
 test.afterEach.always(async (t) => {
+    try {
+        // Test app saves an error.txt file if it encounters an uncaught exception.
+        // It is good to see it's contents if it is present.
+        const errorFile = path.join(appDir, 'error.txt');
+        console.log(
+            'error caught in the test app:',
+            fs.readFileSync(errorFile, 'utf8')
+        );
+        fs.unlinkSync(errorFile);
+    } catch (e) {
+        // There is no error file so we are good ;)
+    }
     if (t.context.app && t.context.app.isRunning()) {
         await t.context.app.stop();
     }

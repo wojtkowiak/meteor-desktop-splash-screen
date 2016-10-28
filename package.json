@@ -29,7 +29,7 @@
     "shelljs": "^0.7.5",
     "electron": "^1.4.4",
     "node-resemble-js": "^0.1.1",
-    "meteor-desktop-plugin-test-suite": "0.0.15"
+    "meteor-desktop-test-suite": "0.0.16"
   },
   "dependencies": {},
   "repository": {

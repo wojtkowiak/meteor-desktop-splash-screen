@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import path from 'path';
+import { app } from 'electron';
 import HtmlBody from './htmlBody';
 import SplashWindow from './splashWindow';
 
@@ -24,15 +25,12 @@ export default class SplashScreen {
 
     /**
      * @param {Object} log              - Winston logger
-     * @param {Object} app              - reference to the Electron app
      * @param {Object} appSettings      - settings.json object
      * @param {Object} eventsBus        - event emitter for listening or emitting events on the
      *                                    desktop side
-     * @param {Object} modules          - reference to all loaded modules
-     * @param {PluginSettings} settings - module settings
-     * @param {Object} Module           - reference to Module class
+     * @param {PluginSettings} settings - plugin settings
      */
-    constructor(log, app, appSettings, eventsBus, modules, settings, Module) {
+    constructor({log, appSettings, eventsBus, settings}) {
         if (process.env.METEOR_DESKTOP_NO_SPLASH_SCREEN ||
             ('enabled' in settings && !settings.enabled)) return;
 
