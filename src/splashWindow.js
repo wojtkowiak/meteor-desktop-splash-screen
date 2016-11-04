@@ -41,7 +41,6 @@ export default class SplashWindow {
         this.splashWindow.focus();
 
         this.opened = true;
-
         this.splashWindow.on('closed', () => {
             this.splashWindow = null;
             this.opened = false;
