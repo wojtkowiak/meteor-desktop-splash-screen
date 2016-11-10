@@ -67,6 +67,10 @@ For smooth developing process you need to open two terminals. In the first one t
 
 Tests are run by [AVA](https://github.com/avajs).
 
+### Changelog
+
+- v0.0.31 - fixed white background blinking before splash screen image load
+
 ### Roadmap
 
 - [ ] support different settings for different platforms
