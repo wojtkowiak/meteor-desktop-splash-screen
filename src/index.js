@@ -30,7 +30,7 @@ export default class SplashScreen {
      *                                    desktop side
      * @param {PluginSettings} settings - plugin settings
      */
-    constructor({log, appSettings, eventsBus, settings}) {
+    constructor({ log, appSettings, eventsBus, settings }) {
         if (process.env.METEOR_DESKTOP_NO_SPLASH_SCREEN ||
             ('enabled' in settings && !settings.enabled)) return;
 

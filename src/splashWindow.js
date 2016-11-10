@@ -22,6 +22,7 @@ export default class SplashWindow {
             transparent: true,
             resizable: false,
             center: true,
+            show: false,
             webPreferences: { nodeIntegration: false }
         };
 
@@ -38,9 +39,11 @@ export default class SplashWindow {
         this.log.info(`displaying splash screen from file://${this.bodyPath}`);
 
         this.splashWindow = new BrowserWindow(this.windowSettings);
-        this.splashWindow.focus();
-
-        this.opened = true;
+        this.splashWindow.once('ready-to-show', () => {
+            this.splashWindow.show();
+            this.splashWindow.focus();
+            this.opened = true;
+        });
 
         this.splashWindow.on('closed', () => {
             this.splashWindow = null;
@@ -48,7 +51,6 @@ export default class SplashWindow {
         });
         // Ensure dev tools will not appear.
         this.splashWindow.webContents.closeDevTools();
-
         this.splashWindow.loadURL(`file://${this.bodyPath}`);
     }
 
