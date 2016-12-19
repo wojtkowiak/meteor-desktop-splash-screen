@@ -21,7 +21,7 @@ export default class SplashWindow {
             frame: false,
             transparent: true,
             resizable: false,
-            center: true,
+            //center: true, //commenting this centers the window on macOS
             show: false,
             webPreferences: { nodeIntegration: false }
         };
