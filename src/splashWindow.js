@@ -21,7 +21,6 @@ export default class SplashWindow {
             frame: false,
             transparent: true,
             resizable: false,
-            center: true,
             show: false,
             webPreferences: { nodeIntegration: false }
         };
