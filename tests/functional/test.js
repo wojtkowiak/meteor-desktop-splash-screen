@@ -15,12 +15,12 @@ async function getApp(t) {
     return app;
 }
 
-async function waitForSplashWindow(t, app) {
+async function waitForSplashWindow(app) {
     await app.client.waitUntil((await app.client.getWindowCount()) === 2);
     await app.client.windowByIndex(1);
     await app.client.waitUntilWindowLoaded();
     await app.client.waitUntil(
-        async () => await app.client.execute(
+        async () => app.client.execute(
             () => document.readyState === 'complete'
         )
     );
@@ -58,8 +58,8 @@ test.before(
     async () => {
         await createTestApp(appDir, 'meteor-desktop-splash-screen');
         shell.mkdir(path.join(appDir, 'assets'));
-        shell.cp('assets/splashScreen.png', path.join(appDir, 'assets'));
-        shell.cp('assets/meteor.png', path.join(appDir, 'assets'));
+        shell.cp(path.join(__dirname, 'assets', 'splashScreen.png'), path.join(appDir, 'assets'));
+        shell.cp(path.join(__dirname, 'assets', 'meteor.png'), path.join(appDir, 'assets'));
     }
 );
 
@@ -94,7 +94,7 @@ test.afterEach.always(async (t) => {
     }
 });
 
-test('the test app', async t => await getApp(t));
+test('the test app', async t => getApp(t));
 
 test('if splash screen is displayed', async (t) => {
     const app = await getApp(t);
@@ -102,7 +102,7 @@ test('if splash screen is displayed', async (t) => {
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
     await fireEventsBusEvent(app, 'beforeModulesLoad');
-    await waitForSplashWindow(t, app);
+    await waitForSplashWindow(app);
     t.true(await app.client.getWindowCount() === 2);
 });
 
@@ -112,7 +112,7 @@ test('if splash screen is closed', async (t) => {
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
     await fireEventsBusEvent(app, 'beforeModulesLoad');
-    await waitForSplashWindow(t, app);
+    await waitForSplashWindow(app);
     t.is(await app.client.getWindowCount(), 2);
     await fireEventsBusEvent(app, 'beforeLoadFinish');
     t.is(await app.client.getWindowCount(), 1);
@@ -125,7 +125,7 @@ test('if window title is set properly', async (t) => {
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
     await fireEventsBusEvent(app, 'beforeModulesLoad');
-    await waitForSplashWindow(t, app);
+    await waitForSplashWindow(app);
     t.is(await app.client.getTitle(), 'SplashTest');
 });
 
@@ -145,16 +145,17 @@ test('if image is displayed', async (t) => {
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
     await fireEventsBusEvent(app, 'beforeModulesLoad');
-    await waitForSplashWindow(t, app);
+    await waitForSplashWindow(app);
     await wait(200);
     const imageBuffer = await app.browserWindow.capturePage();
-    fs.writeFileSync(path.join(__dirname, 'page.png'), imageBuffer);
+    const pagePngPath = path.join(__dirname, 'page.png');
+    fs.writeFileSync(pagePngPath, imageBuffer);
 
     t.true(await isImageSimilar(
-        path.join(__dirname, 'page.png'),
+        pagePngPath,
         path.join(__dirname, 'refs', 'page.png')));
 
-    fs.unlinkSync('page.png');
+    fs.unlinkSync(pagePngPath);
 });
 
 test('if styles can be injected', async (t) => {
@@ -164,17 +165,18 @@ test('if styles can be injected', async (t) => {
         windowSettings: { webPreferences: { nodeIntegration: true } }
     });
     await fireEventsBusEvent(app, 'beforeModulesLoad');
-    await waitForSplashWindow(t, app);
+    await waitForSplashWindow(app);
 
     await wait(200);
     const imageBuffer = await app.browserWindow.capturePage();
-    fs.writeFileSync(path.join(__dirname, 'page_2.png'), imageBuffer);
+    const page2PngPath = path.join(__dirname, 'page_2.png');
+    fs.writeFileSync(page2PngPath, imageBuffer);
 
     t.true(await isImageSimilar(
-        path.join(__dirname, 'page_2.png'),
+        page2PngPath,
         path.join(__dirname, 'refs', 'page_modified_style.png')));
 
-    fs.unlinkSync('page_2.png');
+    fs.unlinkSync(page2PngPath);
 });
 
 test('if window settings can be injected', async (t) => {
@@ -187,7 +189,7 @@ test('if window settings can be injected', async (t) => {
         }
     });
     await fireEventsBusEvent(app, 'beforeModulesLoad');
-    await waitForSplashWindow(t, app);
+    await waitForSplashWindow(app);
 
     t.deepEqual(await app.browserWindow.getSize(), [200, 200]);
 });
@@ -210,7 +212,7 @@ test('if splash screen is displayed with proper window icon [incomplete test]', 
         }
     );
     await fireEventsBusEvent(app, 'beforeModulesLoad');
-    await waitForSplashWindow(t, app);
+    await waitForSplashWindow(app);
 
     // TODO: how to check if windows is displayed with proper icon? is this possible in spectron?
 

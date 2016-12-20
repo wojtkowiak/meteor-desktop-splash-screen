@@ -39,6 +39,7 @@ export default class SplashWindow {
 
         this.splashWindow = new BrowserWindow(this.windowSettings);
         this.splashWindow.once('ready-to-show', () => {
+            this.splashWindow.setIgnoreMouseEvents(true); // Enable click-through over window.
             this.splashWindow.show();
             this.splashWindow.focus();
             this.opened = true;
