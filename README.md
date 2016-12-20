@@ -69,7 +69,10 @@ Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
 
-- v0.0.31 - fixed white background blinking before splash screen image load
+- **v0.1.0**
+    - window is now click-through enabled
+    - fixed [#3](https://github.com/wojtkowiak/meteor-desktop-splash-screen/issues/3)
+- **v0.0.31** - fixed white background blinking before splash screen image load
 
 ### Roadmap
 
