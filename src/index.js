@@ -34,10 +34,9 @@ export default class SplashScreen {
         if (process.env.METEOR_DESKTOP_NO_SPLASH_SCREEN ||
             ('enabled' in settings && !settings.enabled)) return;
 
-        const appPath = app.getAppPath();
+        const installPath = app.getPath('userData');
 
-        const installPath = ~appPath.indexOf('asar') ?
-            path.resolve(path.join(appPath, '..')) : appPath;
+        const appPath = app.getAppPath();
 
         this.eventsBus = eventsBus;
 
@@ -47,7 +46,7 @@ export default class SplashScreen {
             this.log.getLoggerFor('html'),
             path.join(__dirname, 'splash.html'),
             // TODO: make this path configurable and absolute
-            installPath,
+            ~appPath.indexOf('asar') ? path.resolve(path.join(appPath, '..')) : appPath,
             ('windowTitle' in settings) ? settings.windowTitle : appSettings.name,
             ('imagePath' in settings) ? settings.imagePath : undefined,
             ('style' in settings) ? settings.style : {}

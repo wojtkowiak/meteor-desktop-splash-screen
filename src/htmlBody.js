@@ -9,26 +9,26 @@ export default class HtmlBody {
     /**
      * @param {Object} log          - logger instance
      * @param {string} templatePath - path to the template
-     * @param {string} installPath  - installation path
+     * @param {string} appPath      - application path
      * @param {string} title        - title of the html
      * @param {string} imagePath    - path to the image
      * @param {Object} style        - styles to use instead of the defaults
      */
-    constructor(log, templatePath, installPath, title = '', imagePath = 'splashScreen.png',
+    constructor(log, templatePath, appPath, title = '', imagePath = 'splashScreen.png',
                 style = {}) {
         this.log = log;
         this.templatePath = templatePath;
-        this.installPath = path.join(installPath, 'splash.html');
+        this.installPath = path.join(appPath, 'splash.html');
         this.title = title;
         this.imagePath = imagePath;
         this.style = style;
 
         let backgroundImageUrl = encodeURI(
-            path.join(installPath, 'desktop.asar', 'assets', this.imagePath).replace(/\\/gm, '/'));
+            path.join(appPath, 'desktop.asar', 'assets', this.imagePath).replace(/\\/gm, '/'));
 
         if (process.env.ELECTRON_ENV === 'test' && process.env.SPLASH_SCREEN_TEST) {
             backgroundImageUrl = encodeURI(
-                path.join(installPath, 'assets', this.imagePath).replace(/\\/gm, '/'));
+                path.join(appPath, 'assets', this.imagePath).replace(/\\/gm, '/'));
         }
 
         this.defaultStyle = {

@@ -68,7 +68,11 @@ For smooth developing process you need to open two terminals. In the first one t
 Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
-
+- **v0.2.0**
+    - the resultant generated `splash.html` is now saved to 
+    [`userData`](http://electron.atom.io/docs/api/app/#appgetpathname)
+      instead of application directory (fixes permission problems when installing for all users 
+      with NSIS)
 - **v0.1.0**
     - window is now click-through enabled
     - fixed [#3](https://github.com/wojtkowiak/meteor-desktop-splash-screen/issues/3)
