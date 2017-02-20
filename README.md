@@ -34,7 +34,8 @@ You can pass custom settings to the plugin, for example:
                 "border-radius": "5px"
             },
             "imagePath": "mySplashLogo.png",
-            "windowSettings": { "width": 640, "height": 480 }
+            "windowSettings": { "width": 640, "height": 480 },
+            "clickThrough": true
         }
     }
 }
@@ -51,7 +52,7 @@ Here is a definition of what can be set:
  * @property {string}  imagePath      - path to the image relative to the .desktop dir
  * @property {Object}  style          - style of the html body that displays the image
  * @property {Object}  windowSettings - settings passed to BrowserWindow
- * @property {Object}  module         - the Module class from Meteor Desktop
+ * @property {boolean} clickThrough   - enables window click-through [true by default]
  */
 ```
 
@@ -69,6 +70,8 @@ Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
 - **v0.2.0**
+    - `clickThrough` field added to `PluginSettings` - allows to disable splash screen window 
+    click-through which was enabled by default so far
     - the resultant generated `splash.html` is now saved to 
     [`userData`](http://electron.atom.io/docs/api/app/#appgetpathname)
       instead of application directory (fixes permission problems when installing for all users 

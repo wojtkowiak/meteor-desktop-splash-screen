@@ -13,7 +13,7 @@ import SplashWindow from './splashWindow';
  * @property {string}  imagePath      - path to the image relative to the .desktop dir
  * @property {Object}  style          - style of the html body that displays the image
  * @property {Object}  windowSettings - settings passed to BrowserWindow
- * @property {Object}  module         - the Module class from Meteor Desktop
+ * @property {boolean} clickThrough   - enables window click-through [true by default]
  */
 
 /**
@@ -53,6 +53,7 @@ export default class SplashScreen {
         );
 
         const windowSettings = ('windowSettings' in settings) ? settings.windowSettings : {};
+        windowSettings.clickThrough = 'clickThrough' in settings ? settings.clickThrough : true;
 
         if ('window' in appSettings && 'icon' in appSettings.window) {
             windowSettings.icon = appSettings.window.icon;
