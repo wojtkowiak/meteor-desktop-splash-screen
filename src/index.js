@@ -47,6 +47,7 @@ export default class SplashScreen {
             path.join(__dirname, 'splash.html'),
             // TODO: make this path configurable and absolute
             ~appPath.indexOf('asar') ? path.resolve(path.join(appPath, '..')) : appPath,
+            installPath,
             ('windowTitle' in settings) ? settings.windowTitle : appSettings.name,
             ('imagePath' in settings) ? settings.imagePath : undefined,
             ('style' in settings) ? settings.style : {}

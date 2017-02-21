@@ -10,15 +10,16 @@ export default class HtmlBody {
      * @param {Object} log          - logger instance
      * @param {string} templatePath - path to the template
      * @param {string} appPath      - application path
+     * @param {string} installPath      - generated splash.html path
      * @param {string} title        - title of the html
      * @param {string} imagePath    - path to the image
      * @param {Object} style        - styles to use instead of the defaults
      */
-    constructor(log, templatePath, appPath, title = '', imagePath = 'splashScreen.png',
+    constructor(log, templatePath, appPath, installPath, title = '', imagePath = 'splashScreen.png',
                 style = {}) {
         this.log = log;
         this.templatePath = templatePath;
-        this.installPath = path.join(appPath, 'splash.html');
+        this.installPath = path.join(installPath, 'splash.html');
         this.title = title;
         this.imagePath = imagePath;
         this.style = style;
