@@ -10,4 +10,4 @@ tests
 .travis.yml
 appveyor.yml
 circle.yml
-
+*.js___jb_tmp___
