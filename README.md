@@ -69,6 +69,8 @@ For smooth developing process you need to open two terminals. In the first one t
 Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
+- **v0.2.1**
+    - fixed incorrectly released `0.2.0` (not all changes were included)
 - **v0.2.0**
     - `clickThrough` field added to `PluginSettings` - allows to disable splash screen window 
     click-through which was enabled by default so far
