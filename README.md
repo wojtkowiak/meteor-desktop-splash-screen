@@ -53,6 +53,8 @@ Here is a definition of what can be set:
  * @property {Object}  style          - style of the html body that displays the image
  * @property {Object}  windowSettings - settings passed to BrowserWindow
  * @property {boolean} clickThrough   - enables window click-through [true by default]
+ * @property {boolean} debug          - enables devTools, makes the window remain open,
+ *                                      sets `resizable` and `alwaysOnTop` to false
  */
 ```
 

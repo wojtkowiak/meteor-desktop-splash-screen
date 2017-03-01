@@ -6,13 +6,16 @@ import { BrowserWindow } from 'electron';
 export default class SplashWindow {
 
     /**
-     * @param {Object} log            - logger instance
-     * @param {string} bodyPath       - path to the html to display
-     * @param {Object} windowSettings - window settings to use
+     * @param {Object}  log            - logger instance
+     * @param {string}  bodyPath       - path to the html to display
+     * @param {Object}  windowSettings - window settings to use
+     * @param {boolean} debug          - enables devTools, makes the window remain open,
+     *                                   sets `resizable` and `alwaysOnTop` to false
      */
-    constructor(log, bodyPath, windowSettings) {
+    constructor(log, bodyPath, windowSettings, debug = false) {
         this.log = log;
         this.opened = false;
+        this.debug = debug;
         this.bodyPath = bodyPath;
         this.windowSettings = {
             width: 1024,
@@ -29,6 +32,10 @@ export default class SplashWindow {
         Object.keys(windowSettings).forEach((rule) => {
             this.windowSettings[rule] = windowSettings[rule];
         });
+
+        if (debug) {
+            Object.assign(this.windowSettings, { alwaysOnTop: false, resizable: false });
+        }
     }
 
     /**
@@ -53,8 +60,14 @@ export default class SplashWindow {
             this.splashWindow = null;
             this.opened = false;
         });
-        // Ensure dev tools will not appear.
-        this.splashWindow.webContents.closeDevTools();
+
+        if (!this.debug) {
+            // Ensure dev tools will not appear.
+            this.splashWindow.webContents.closeDevTools();
+        } else {
+            this.splashWindow.webContents.openDevTools({ mode: 'undocked' });
+        }
+
         this.splashWindow.loadURL(`file://${this.bodyPath}`);
     }
 
@@ -62,7 +75,7 @@ export default class SplashWindow {
      * Closes the window.
      */
     close() {
-        if (this.opened) {
+        if (this.opened && !this.debug) {
             this.splashWindow.close();
         }
     }

@@ -14,6 +14,8 @@ import SplashWindow from './splashWindow';
  * @property {Object}  style          - style of the html body that displays the image
  * @property {Object}  windowSettings - settings passed to BrowserWindow
  * @property {boolean} clickThrough   - enables window click-through [true by default]
+ * @property {boolean} debug          - enables devTools, makes the window remain open,
+ *                                      sets `resizable` and `alwaysOnTop` to false
  */
 
 /**
@@ -63,7 +65,8 @@ export default class SplashScreen {
         this.splashWindow = new SplashWindow(
             this.log.getLoggerFor('splashWindow'),
             this.htmlBody.getInstallPath(),
-            windowSettings
+            windowSettings,
+            settings.debug
         );
 
         this.registerToEvents();
