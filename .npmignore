@@ -1,7 +1,6 @@
 src
 .idea
 tests
-*.js___jb_tmp___
 .babelrc
 .codeclimate.yml
 .eslintrc
@@ -10,4 +9,5 @@ tests
 .travis.yml
 appveyor.yml
 circle.yml
+dist/scripts
 *.js___jb_tmp___
