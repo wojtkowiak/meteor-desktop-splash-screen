@@ -1,10 +1,14 @@
 language: node_js
 
-node_js: "6"
+node_js:
+ - 4
+ - 6
+ - 7
 
 os:
 - linux
 - osx
+
 matrix:
   fast_finish: true
 
@@ -19,6 +23,7 @@ before_script:
         sh -e /etc/init.d/xvfb start;
         sleep 8;
     fi
+  - if [[ $(npm -v) != 4* ]]; then npm i -g npm@4; fi;
 
 cache:
   directories:
