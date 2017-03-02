@@ -33,7 +33,7 @@ export default class HtmlBody {
         }
 
         this.defaultStyle = {
-            'background-image': `url(file:///${backgroundImageUrl})`,
+            'background-image': `url('file:///${backgroundImageUrl}')`,
             'background-size': 'contain',
             'background-repeat': 'no-repeat',
             'background-attachment': 'fixed',
