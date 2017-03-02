@@ -57,6 +57,7 @@ Here is a definition of what can be set:
  *                                      sets `resizable` and `alwaysOnTop` to false
  */
 ```
+`debug` can also be set at runtime by setting `METEOR_DESKTOP_DEBUG` environmental variable. 
 
 If you have an icon set for the window in your settings.json it will be automatically used for splash screen's window - no need to set it here.
 
@@ -71,6 +72,9 @@ For smooth developing process you need to open two terminals. In the first one t
 Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
+- **v0.3.0**
+    - debug mode added - `debug` field added to `PluginSettings`
+    - fixed splash screen not being shown when building and installing with NSIS and 32bit arch
 - **v0.2.1**
     - fixed incorrectly released `0.2.0` (not all changes were included)
 - **v0.2.0**
