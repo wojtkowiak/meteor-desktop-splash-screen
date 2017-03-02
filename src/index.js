@@ -62,11 +62,13 @@ export default class SplashScreen {
             windowSettings.icon = appSettings.window.icon;
         }
 
+        const debug = process.env.METEOR_DESKTOP_DEBUG ? true : settings.debug;
+
         this.splashWindow = new SplashWindow(
             this.log.getLoggerFor('splashWindow'),
             this.htmlBody.getInstallPath(),
             windowSettings,
-            settings.debug
+            debug
         );
 
         this.registerToEvents();
