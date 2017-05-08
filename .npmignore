@@ -1,6 +1,6 @@
 src
 .idea
-tests
+test
 .babelrc
 .codeclimate.yml
 .eslintrc
