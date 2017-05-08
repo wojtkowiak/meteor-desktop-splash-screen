@@ -3,7 +3,7 @@
 <sup>Travis</sup> [![Travis Build Status](https://travis-ci.org/wojtkowiak/meteor-desktop-splash-screen.svg?branch=master)](https://travis-ci.org/wojtkowiak/meteor-desktop-splash-screen) <sup>AppVeyor</sup> [![Build status](https://ci.appveyor.com/api/projects/status/f52xvrra1gouyg1t/branch/master?svg=true)](https://ci.appveyor.com/project/wojtkowiak/meteor-desktop-splash-screen) <sup>CircleCI</sup> [![CircleCI](https://circleci.com/gh/wojtkowiak/meteor-desktop-splash-screen/tree/master.svg?style=svg)](https://circleci.com/gh/wojtkowiak/meteor-desktop-splash-screen/tree/master)
 
 ---
-A nice splash screen for you Meteor app on desktop!
+A nice splash screen for you Meteor app on desktop! (and an update screen too!)
 
 ### Usage
 
@@ -35,7 +35,20 @@ You can pass custom settings to the plugin, for example:
             },
             "imagePath": "mySplashLogo.png",
             "windowSettings": { "width": 640, "height": 480 },
-            "clickThrough": true
+            "clickThrough": true,
+            "updateScreen": true,
+            "updateScreenSettings": {
+                "imagePath": "updating.gif",
+                "windowSettings": {
+                    "width": 400,
+                    "height": 300
+                },
+                "clickThrough": false,
+                "style": {
+                    "append": true,
+                    "background-size": "auto"
+                }
+            }            
         }
     }
 }
@@ -46,15 +59,25 @@ Here is a definition of what can be set:
 ```javascript
 /**
  * @typedef {Object} PluginSettings
- * @property {boolean} enabled        - is splash screen enabled
- * @property {string}  windowTitle    - title of the window that shows splash screen - it defaults
- *                                      to the `name` from settings.json
- * @property {string}  imagePath      - path to the image relative to the .desktop dir
- * @property {Object}  style          - style of the html body that displays the image
- * @property {Object}  windowSettings - settings passed to BrowserWindow
- * @property {boolean} clickThrough   - enables window click-through [true by default]
- * @property {boolean} debug          - enables devTools, makes the window remain open,
- *                                      sets `resizable` and `alwaysOnTop` to false
+ * @property {boolean} enabled                  - is splash screen enabled
+ * @property {string}  windowTitle              - title of the window that shows splash screen -
+ *                                                it defaults to the `name` from settings.json
+ * @property {string}  imagePath                - path to the image relative to the .desktop dir
+ * @property {Object}  style                    - style of the html body that displays the image
+ * @property {Object}  windowSettings           - settings passed to BrowserWindow
+ * @property {boolean} clickThrough             - enables window click-through [true by default]
+ * @property {boolean} updateScreenOnDesktopHCP - true by default, shows update screen after app
+ *                                                restart triggered by desktop HCP update, otherwise
+ *                                                normal splash screen will be used
+ * @property {boolean} updateScreen             - enables hot code push update screen
+ * @property {Object}  updateScreenSettings     - object in which you can override `windowTitle`,
+ *                                                `imagePath`, `style`, `windowSettings`,
+ *                                                `clickThrough` for `style` and `windowSettings`
+ *                                                you can set `append` fields to true if you want
+ *                                                to merge the settings and append/override them
+ * @property {boolean} debug                    - enables devTools, makes the window remain open,
+ *                                                sets `resizable` and `alwaysOnTop` to false
+ */
  */
 ```
 `debug` can also be set at runtime by setting `METEOR_DESKTOP_DEBUG` environmental variable. 
@@ -62,6 +85,14 @@ Here is a definition of what can be set:
 If you have an icon set for the window in your settings.json it will be automatically used for splash screen's window - no need to set it here.
 
 If you want to disable the splash screen temporarily for any reason you can use the `METEOR_DESKTOP_NO_SPLASH_SCREEN` env var.  
+
+### Hot code push update screen
+
+Place your update screen in `.desktop/assets/updateScreen.png` and tweak necessary settings. The update screen receives all the settings from the splash screen but you can override them in `updateScreenSettings`.
+Also for `style` and `windowSettings` you can set `append` field to true if you want to merge those instead of overriding.
+
+- **desktopHCP** - the same update screen is shown when the app is restarted after desktopHCP, you can however turn it off and show the splash screen instead by setting `updateScreenOnDesktopHCP` to `false` 
+
 
 ### Contribution
 
@@ -72,6 +103,8 @@ For smooth developing process you need to open two terminals. In the first one t
 Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
+- **v0.4.0**
+    - update screen functionality added
 - **v0.3.0**
     - debug mode added - `debug` field added to `PluginSettings`
     - fixed splash screen not being shown when building and installing with NSIS and 32bit arch

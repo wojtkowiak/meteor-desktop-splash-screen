@@ -1,98 +1,20 @@
 /* eslint-disable no-param-reassign, no-console */
 import test from 'ava';
-import { Application } from 'spectron';
 import path from 'path';
 import fs from 'fs';
 import shell from 'shelljs';
-import resemble from 'node-resemble-js';
-import electron from 'electron';
-import { createTestApp, constructPlugin, fireEventsBusEvent } from 'meteor-desktop-test-suite';
+import { constructPlugin, fireEventsBusEvent } from 'meteor-desktop-test-suite';
+import { before, beforeEach, always, getApp, waitForSplashWindow, wait, isImageSimilar }
+    from './helpers/helpers';
 
-async function getApp(t) {
-    const app = t.context.app;
-    await app.client.waitUntilWindowLoaded();
-    t.is(await app.client.getWindowCount(), 1);
-    return app;
-}
+const appDir = path.join(__dirname, '.testApp');
 
-async function waitForSplashWindow(app) {
-    await app.client.waitUntil((await app.client.getWindowCount()) === 2);
-    await app.client.windowByIndex(1);
-    await app.client.waitUntilWindowLoaded();
-    await app.client.waitUntil(
-        async () => app.client.execute(
-            () => document.readyState === 'complete'
-        )
-    );
-}
-
-function wait(ms) {
-    return new Promise((resolve) => {
-        setTimeout(() => resolve(), ms);
-    });
-}
-
-async function isImageSimilar(
-    source,
-    reference,
-    tolerance = (process.env.TRAVIS || process.env.APPVEYOR ? 15 : 5)
-) {
-    return new Promise((resolve) => {
-        resemble(source)
-            .compareTo(reference)
-            .ignoreColors()
-            .onComplete((data) => {
-                if (data.misMatchPercentage <= tolerance) {
-                    resolve(true);
-                } else {
-                    console.warn(`Images mismatch at ${data.misMatchPercentage}%`);
-                    resolve(false);
-                }
-            });
-    });
-}
-
-const appDir = path.join(__dirname, '..', '.testApp');
-
-test.before(
-    async () => {
-        await createTestApp(appDir, 'meteor-desktop-splash-screen');
-        shell.mkdir(path.join(appDir, 'assets'));
-        shell.cp(path.join(__dirname, 'assets', 'splashScreen.png'), path.join(appDir, 'assets'));
-        shell.cp(path.join(__dirname, 'assets', 'meteor.png'), path.join(appDir, 'assets'));
-    }
-);
-
+test.before(before.bind(null, appDir));
+test.beforeEach(beforeEach.bind(null, appDir, undefined));
+test.afterEach.always(always.bind(null, appDir));
 test.after(
     () => shell.rm('-rf', appDir)
 );
-
-test.beforeEach(async (t) => {
-    t.context.app = new Application({
-        path: electron,
-        args: [appDir],
-        env: { ELECTRON_ENV: 'test', SPLASH_SCREEN_TEST: 1 }
-    });
-    await t.context.app.start();
-});
-
-test.afterEach.always(async (t) => {
-    try {
-        // Test app saves an error.txt file if it encounters an uncaught exception.
-        // It is good to see it's contents if it is present.
-        const errorFile = path.join(appDir, 'error.txt');
-        console.log(
-            'error caught in the test app:',
-            fs.readFileSync(errorFile, 'utf8')
-        );
-        fs.unlinkSync(errorFile);
-    } catch (e) {
-        // There is no error file so we are good ;)
-    }
-    if (t.context.app && t.context.app.isRunning()) {
-        await t.context.app.stop();
-    }
-});
 
 test('the test app', async t => getApp(t));
 
@@ -118,7 +40,7 @@ test('if splash screen is closed', async (t) => {
     t.is(await app.client.getWindowCount(), 1);
 });
 
-test('if window title is set properly', async (t) => {
+test('if splash window title is set properly', async (t) => {
     const app = await getApp(t);
     await constructPlugin(app, undefined, undefined, undefined, undefined, undefined, {
         windowTitle: 'SplashTest',
@@ -153,7 +75,7 @@ test('if image is displayed', async (t) => {
 
     t.true(await isImageSimilar(
         pagePngPath,
-        path.join(__dirname, 'refs', 'page.png')));
+        path.join(__dirname, 'refs', 'splash.png')));
 
     fs.unlinkSync(pagePngPath);
 });
@@ -174,7 +96,7 @@ test('if styles can be injected', async (t) => {
 
     t.true(await isImageSimilar(
         page2PngPath,
-        path.join(__dirname, 'refs', 'page_modified_style.png')));
+        path.join(__dirname, 'refs', 'splash_modified_style.png')));
 
     fs.unlinkSync(page2PngPath);
 });
