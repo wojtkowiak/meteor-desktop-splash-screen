@@ -15,11 +15,17 @@ export default class HtmlBody {
      * @param {string} imagePath    - path to the image
      * @param {Object} style        - styles to use instead of the defaults
      */
-    constructor(log, templatePath, appPath, installPath, title = '', imagePath = 'splashScreen.png',
-                style = {}) {
+    constructor({ log,
+                  templatePath = path.join(__dirname, 'splash.html'),
+                  appPath,
+                  installPath,
+                  title = '',
+                  imagePath = 'splashScreen.png',
+                  style = {}
+    }) {
         this.log = log;
         this.templatePath = templatePath;
-        this.installPath = path.join(installPath, 'splash.html');
+        this.installPath = installPath;
         this.title = title;
         this.imagePath = imagePath;
         this.style = style;
@@ -62,14 +68,14 @@ export default class HtmlBody {
      */
     prepare() {
         let splashHTML;
-        this.log.info('preparing splash screen.');
+        this.log.info('preparing splash screen');
 
         splashHTML = fs.readFileSync(this.templatePath, 'UTF-8');
         splashHTML = splashHTML.replace('{title}', this.title);
         splashHTML = splashHTML.replace('{style}', this.getStylesAsString());
         fs.writeFileSync(this.installPath, splashHTML);
 
-        this.log.info('splash screen prepared.');
+        this.log.info('splash screen prepared');
     }
 
     /**
