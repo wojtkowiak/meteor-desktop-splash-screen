@@ -69,7 +69,8 @@ Here is a definition of what can be set:
  * @property {boolean} updateScreenOnDesktopHCP - true by default, shows update screen after app
  *                                                restart triggered by desktop HCP update, otherwise
  *                                                normal splash screen will be used
- * @property {boolean} updateScreen             - enables hot code push update screen
+ * @property {boolean} updateScreen             - false by default, enables hot code push update
+ *                                                screen
  * @property {Object}  updateScreenSettings     - object in which you can override `windowTitle`,
  *                                                `imagePath`, `style`, `windowSettings`,
  *                                                `clickThrough` for `style` and `windowSettings`
