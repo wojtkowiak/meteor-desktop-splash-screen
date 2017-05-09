@@ -36,6 +36,8 @@ export default class SplashWindow {
         if (debug) {
             Object.assign(this.windowSettings, { alwaysOnTop: false, resizable: false });
         }
+
+        // TODO: show the window on the same screen the app is.
     }
 
     /**
@@ -50,7 +52,6 @@ export default class SplashWindow {
                 this.log.verbose('enabling click through');
                 this.splashWindow.setIgnoreMouseEvents(true); // Enable click-through over window.
             }
-
             this.splashWindow.show();
             this.splashWindow.focus();
             this.opened = true;
