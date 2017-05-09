@@ -29,7 +29,7 @@
         ],
         "import/no-extraneous-dependencies": ["error",
             {
-                "devDependencies": ["**/tests/**/*.js"]
+                "devDependencies": ["**/test/**/*.js"]
             }
         ]
     }

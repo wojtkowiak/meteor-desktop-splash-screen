@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import shell from 'shelljs';
 import resemble from 'node-resemble-js';
 import electron from 'electron';
@@ -49,8 +50,7 @@ export async function isImageSimilar(
     });
 }
 
-export async function before(appDir, t) {
-    console.log(appDir, path.join(__dirname, '..', 'assets', 'splashScreen.png'), path.resolve(path.join(__dirname, '..', 'assets', 'splashScreen.png')));
+export async function before(appDir) {
     await createTestApp(appDir, 'meteor-desktop-splash-screen');
     shell.mkdir(path.join(appDir, 'assets'));
     shell.cp(path.join(__dirname, '..', 'assets', 'splashScreen.png'), path.join(appDir, 'assets'));
@@ -60,7 +60,7 @@ export async function before(appDir, t) {
 
 export async function beforeEach(appDir, cmd, t) {
     const args = cmd ? [appDir, cmd] : [appDir];
-    t.context.app = new Application({
+    t.context.app = new Application({ // eslint-disable-line
         path: electron,
         args,
         env: { ELECTRON_ENV: 'test', SPLASH_SCREEN_TEST: 1 }
