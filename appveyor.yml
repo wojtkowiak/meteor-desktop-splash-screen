@@ -11,9 +11,9 @@ skip_tags: true
 
 environment:
   matrix:
-    - nodejs_version: "4"
     - nodejs_version: "6"
-    - nodejs_version: "7"
+    - nodejs_version: "8"
+    - nodejs_version: "9"
 
 platform:
   - x86
@@ -24,10 +24,10 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install npm
-  - .\node_modules\.bin\npm install
+  - npm install -g npm@5
+  - npm prune
+  - npm install
 
 test_script:
   - node --version
-  - .\node_modules\.bin\npm --version
-  - .\node_modules\.bin\npm test
+  - npm test

@@ -6,8 +6,8 @@ os:
 
 env:
  - NODE_VERSION=6
- - NODE_VERSION=7
- - NODE_VERSION=4
+ - NODE_VERSION=8
+ - NODE_VERSION=9
 
 matrix:
   fast_finish: true
@@ -20,7 +20,7 @@ branches:
 before_install:
   - nvm install $NODE_VERSION
   - nvm use --delete-prefix $NODE_VERSION || echo
-  - if [[ $(npm -v) != 4* ]]; then npm i -g npm@4; fi;
+  - if [[ $(npm -v) != 5* ]]; then npm i -g npm@5; fi;
   - npm install
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         export DISPLAY=:99.0;

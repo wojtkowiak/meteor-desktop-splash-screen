@@ -14,7 +14,7 @@ export async function getApp(t) {
 }
 
 export async function waitForSplashWindow(app) {
-    await app.client.waitUntil((await app.client.getWindowCount()) === 2);
+    await app.client.waitUntil(async () => (await app.client.getWindowCount()) === 2);
     await app.client.windowByIndex(1);
     await app.client.waitUntilWindowLoaded();
     await app.client.waitUntil(

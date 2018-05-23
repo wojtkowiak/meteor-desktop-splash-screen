@@ -51,6 +51,19 @@ test('if splash window title is set properly', async (t) => {
     t.is(await app.client.getTitle(), 'SplashTest');
 });
 
+test('if window size is correct', async (t) => {
+    const app = await getApp(t);
+    await constructPlugin(app, undefined, undefined, undefined, undefined, undefined, {
+        windowTitle: 'SplashTest',
+        windowSettings: { width: 200, height: 400, webPreferences: { nodeIntegration: true } }
+    });
+    await fireEventsBusEvent(app, 'beforeModulesLoad');
+    await waitForSplashWindow(app);
+    const size = await app.browserWindow.getSize();
+    t.true(size[0] === 200);
+    t.true(size[1] === 400);
+});
+
 test('if splash screen can be disabled', async (t) => {
     const app = await getApp(t);
     await constructPlugin(app, undefined, undefined, undefined, undefined, undefined, {
