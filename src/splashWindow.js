@@ -52,6 +52,10 @@ export default class SplashWindow {
                 this.log.verbose('enabling click through');
                 this.splashWindow.setIgnoreMouseEvents(true); // Enable click-through over window.
             }
+            // Set the size again, these seems to fix the Electron 2.0 window size problems when
+            // transparency is enabled.
+            this.splashWindow.setSize(this.windowSettings.width, this.windowSettings.height);
+
             this.splashWindow.show();
             this.splashWindow.focus();
             this.opened = true;
