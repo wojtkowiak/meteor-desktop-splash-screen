@@ -103,6 +103,8 @@ For smooth developing process you need to open two terminals. In the first one t
 Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
+- **v0.4.2**
+    - fix for the workaround messing with `fullscreen: true`
 - **v0.4.1**
     - workaround for [meteor-desktop#173](https://github.com/wojtkowiak/meteor-desktop/issues/173)
 - **v0.4.0**
