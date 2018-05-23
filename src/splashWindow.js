@@ -54,7 +54,9 @@ export default class SplashWindow {
             }
             // Set the size again, these seems to fix the Electron 2.0 window size problems when
             // transparency is enabled.
-            this.splashWindow.setSize(this.windowSettings.width, this.windowSettings.height);
+            if (!this.windowSettings.fullscreen) {
+                this.splashWindow.setSize(this.windowSettings.width, this.windowSettings.height);
+            }
 
             this.splashWindow.show();
             this.splashWindow.focus();
