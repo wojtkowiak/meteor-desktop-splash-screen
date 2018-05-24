@@ -103,10 +103,13 @@ For smooth developing process you need to open two terminals. In the first one t
 Tests are run by [AVA](https://github.com/avajs).
 
 ### Changelog
+- **v0.4.3**
+    - reverted workaround as it seems the window size issue is fixed in electron `2.0.2`
 - **v0.4.2**
     - fix for the workaround messing with `fullscreen: true`
 - **v0.4.1**
     - workaround for [meteor-desktop#173](https://github.com/wojtkowiak/meteor-desktop/issues/173)
+    - the plugin is now transpiled in `babel7`
 - **v0.4.0**
     - update screen functionality added
 - **v0.3.0**
