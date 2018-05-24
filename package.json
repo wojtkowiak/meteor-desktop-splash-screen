@@ -1,6 +1,6 @@
 {
   "name": "meteor-desktop-splash-screen",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "engines": {
     "node": ">=6.0.0",
     "meteor-desktop": ">=0.6.0"

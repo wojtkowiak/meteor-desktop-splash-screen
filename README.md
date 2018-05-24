@@ -12,7 +12,7 @@ In your `.desktop/settings.json` add this package to your plugins list:
 {
     "plugins": {
        "meteor-desktop-splash-screen": {
-            "version": "0.4.2"
+            "version": "0.4.3"
         }
     }
 }
@@ -27,7 +27,7 @@ You can pass custom settings to the plugin, for example:
 {
     "plugins": {
        "meteor-desktop-splash-screen": {
-            "version": "0.4.2",
+            "version": "0.4.3",
             "style": { 
                 "box-sizing": "border-box",
                 "border": "5px solid black",
